@@ -1,0 +1,1 @@
+gcc-14 fitting_polinomiale_copy.c lib/matrix.c -Ilib  -o fitting_polinomiale_copy

@@ -159,3 +159,36 @@ void matrice_vandermon (double *mat, size_t righe, size_t col, double *val)
         }
     }
 }
+
+void coefficent (double *x, size_t row, size_t col, double *y, double *risultato)
+{
+    double *vander_mat = (double*)malloc(row * col * sizeof(double));
+    double *holder = (double*)malloc(row * col * sizeof(double));
+    double *vander_trasposta = (double*)malloc(row * col * sizeof(double));
+    double *denominatore = (double*)malloc(col * col * sizeof(double));
+    double *numeratore = (double*)malloc(col * sizeof(double));
+    
+    matrice_vandermon(vander_mat, row, col, x);
+    trasposta(vander_mat, row, col, vander_trasposta);
+    prod_matrice(vander_trasposta, col, row, vander_mat, col, holder);
+    gauss_inversion(holder, col, col, denominatore);
+    prod_matrice(vander_trasposta, col, row, y, 1, numeratore);
+    prod_matrice(denominatore, col, col, numeratore, 1, risultato);
+    // "Debug"
+    printf("vander matrix\n");
+    stampa_matrice(vander_mat, row, col);
+    printf("vander trasposta\n");
+    stampa_matrice(vander_trasposta, col, row);
+    printf("vander per\n");
+    stampa_matrice(holder, col, col);
+    printf("inversa della precendete\n");
+    stampa_matrice(denominatore, col, col);
+    printf("numeratore\n");
+    stampa_matrice(numeratore, col, 1);
+
+    free(vander_mat);
+    free(holder);
+    free(vander_trasposta);
+    free(denominatore);
+    free(numeratore);
+}

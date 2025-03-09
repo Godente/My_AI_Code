@@ -201,7 +201,6 @@ int main()
 
  size_t ordine = 4;
  size_t dim_x = sizeof(x) / sizeof(x[0]);
- size_t dim_y = sizeof(y) / sizeof(y[0]);
 
  double *coefficenti = (double*)malloc(ordine * sizeof(double));
 
