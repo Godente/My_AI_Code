@@ -176,6 +176,7 @@ void coefficent (double *x, size_t row, size_t col, double *y, double *risultato
     prod_matrice(vander_trasposta, col, row, y, 1, numeratore);
     prod_matrice(denominatore, col, col, numeratore, 1, risultato);
     // "Debug"
+    #if DEBUG
     printf("vander matrix\n");
     stampa_matrice(vander_mat, row, col);
     printf("vander trasposta\n");
@@ -186,7 +187,8 @@ void coefficent (double *x, size_t row, size_t col, double *y, double *risultato
     stampa_matrice(denominatore, col, col);
     printf("numeratore\n");
     stampa_matrice(numeratore, col, 1);
-
+    #endif
+    
     free(vander_mat);
     free(holder);
     free(vander_trasposta);

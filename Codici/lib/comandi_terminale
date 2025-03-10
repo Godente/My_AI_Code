@@ -1,1 +1,3 @@
 gcc-14 fitting_polinomiale_copy.c lib/matrix.c -Ilib  -o fitting_polinomiale_copy
+
+seleziona tutte le occorrenze della corrispondenza di ricerca è cmd + shift + L 

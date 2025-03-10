@@ -25,60 +25,60 @@ void trasposta (double *matrix1, size_t righe1, size_t colonne1, double *holder)
     }
 }
 
-void swap_rows(double *mat, size_t riga1, size_t riga2, size_t colonne)
+void swap_rows(double *matrix, size_t riga1, size_t riga2, size_t colonne)
 {
     double holder;
     for (size_t j = 0; j < colonne; j++)
     {
-        holder = mat[riga1 * colonne + j];
-        mat[riga1 * colonne + j] = mat[riga2 * colonne + j];
-        mat[riga2 * colonne + j] = holder;
+        holder = matrix[riga1 * colonne + j];
+        matrix[riga1 * colonne + j] = matrix[riga2 * colonne + j];
+        matrix[riga2 * colonne + j] = holder;
     }
 }
 
-void multiply_array(double *array, size_t L, double val)
+void multiply_array(double *array, size_t L, double scalar)
 {
     for (size_t i = 0; i < L; i++)
     {
-        array[i] *= val;
+        array[i] *= scalar;
     }
 }
 
-void enhanced_matrix(double *mat, size_t righe, size_t col, double *enhanced_mat)
+void enhanced_matrix(double *matrix, size_t righe, size_t col, double *enhanced_matrix)
 {
     for (size_t i = 0; i < righe; i++)
     {
         for (size_t j = 0; j < col; j++)
         {
-            enhanced_mat[i * 2 * col + j] = mat[i * col + j]; // Parte sinistra: matrice originale
-            enhanced_mat[i * 2 * col + col + j] = (i == j) ? 1.0 : 0.0; // Parte destra: matrice identità
+            enhanced_matrix[i * 2 * col + j] = matrix[i * col + j]; // Parte sinistra: matrice originale
+            enhanced_matrix[i * 2 * col + col + j] = (i == j) ? 1.0 : 0.0; // Parte destra: matrice identità
                                               //condizione ? valore_se_vero : valore_se_falso
         }
     }
 }
 
-void sottrazione(double *array1, size_t L, double *array2)
+void sottrazione(double *array1, size_t length, double *array2)
 {
-    for (size_t i = 0; i < L; i++)
+    for (size_t i = 0; i < length; i++)
     {
         array1[i] -= array2[i];
     }
 }
 
-void clona_array(double *source, double *dest, size_t L)
+void clona_array(double *source, double *dest, size_t length)
 {
-    for (size_t i = 0; i < L; i++)
+    for (size_t i = 0; i < length; i++)
     {
         dest[i] = source[i];
     }
 }
 
-int gauss_inversion(double *mat, size_t riga, size_t col, double *i_mat)
+int gauss_inversion(double *matrix, size_t riga, size_t col, double *inv_matrix)
 {
     double *e_mat = (double *)malloc(riga * 2 * col * sizeof(double));
     double *row_copy = (double *)malloc(2 * col * sizeof(double));
 
-    enhanced_matrix(mat, riga, col, e_mat);
+    enhanced_matrix(matrix, riga, col, e_mat);
 
     for (size_t i = 0; i < riga; i++)
     {
@@ -124,7 +124,7 @@ int gauss_inversion(double *mat, size_t riga, size_t col, double *i_mat)
     {
         for (size_t j = 0; j < col; j++)
         {
-            i_mat[i * col + j] = e_mat[i * 2 * col + col + j];
+            inv_matrix[i * col + j] = e_mat[i * 2 * col + col + j];
         }
     }
     //quando si lavora con i malloc bisogna ricordarsi di liberare la memoria
@@ -149,13 +149,13 @@ void prod_matrice(double *matrice1, size_t righe1, size_t colonne1, double *matr
     }
 }
 
-void matrice_vandermon (double *mat, size_t righe, size_t col, double *val)
+void matrice_vandermon (double *matrix, size_t righe, size_t col, double *x)
 {
     for(size_t i = 0; i < righe; i++)
     {
         for(size_t j = 0; j < col; j++)
         {
-            mat[i * col + j] = pow(val[i], j);
+            matrix[i * col + j] = pow(x[i], j); // = x[i]^j
         }
     }
 }
@@ -175,6 +175,7 @@ void coefficent (double *x, size_t row, size_t col, double *y, double *risultato
     prod_matrice(vander_trasposta, col, row, y, 1, numeratore);
     prod_matrice(denominatore, col, col, numeratore, 1, risultato);
     // "Debug"
+   #if DEBUG
     printf("vander matrix\n");
     stampa_matrice(vander_mat, row, col);
     printf("vander trasposta\n");
@@ -185,7 +186,8 @@ void coefficent (double *x, size_t row, size_t col, double *y, double *risultato
     stampa_matrice(denominatore, col, col);
     printf("numeratore\n");
     stampa_matrice(numeratore, col, 1);
-
+    #endif
+    
     free(vander_mat);
     free(holder);
     free(vander_trasposta);
