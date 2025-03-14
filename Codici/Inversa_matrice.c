@@ -28,7 +28,6 @@ void stampa_matrice(double *matrice, size_t righe, size_t colonne)
         }
         printf("\n");
     }
-    printf("\n");
 }
 
 void swap_rows(double *mat, size_t riga1, size_t riga2, size_t colonne)

@@ -1,6 +1,5 @@
 #include "matrix.h"
 
-
 void stampa_matrice(double *matrix, size_t righe, size_t colonne)
 {
     for (size_t i = 0; i < righe; i++)
@@ -11,7 +10,6 @@ void stampa_matrice(double *matrix, size_t righe, size_t colonne)
         }
         printf("\n");
     }
-    printf("\n");
 }
 
 void trasposta (double *matrix1, size_t righe1, size_t colonne1, double *holder)
@@ -62,6 +60,14 @@ void sottrazione(double *array1, size_t length, double *array2)
     for (size_t i = 0; i < length; i++)
     {
         array1[i] -= array2[i];
+    }
+}
+
+void addizione(double *array1, size_t length, double *array2)
+{
+    for (size_t i = 0; i < length; i++)
+    {
+        array1[i] += array2[i];
     }
 }
 
@@ -130,7 +136,7 @@ int gauss_inversion(double *matrix, size_t riga, size_t col, double *inv_matrix)
     //quando si lavora con i malloc bisogna ricordarsi di liberare la memoria
     free(e_mat);
     free(row_copy);
-    return 1; // Successo
+    return 0; // Successo
 }
 
 void prod_matrice(double *matrice1, size_t righe1, size_t colonne1, double *matrice2, size_t colonne2, double *holder)
