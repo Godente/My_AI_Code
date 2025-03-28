@@ -25,7 +25,6 @@ void swap_rows(double *mat, size_t riga1, size_t riga2, size_t colonne)
         mat[riga2 * colonne + j] = holder;
     }
 }
-
 void multiply_array(double *array, size_t L, double val)
 {
     for(size_t i = 0; i < L; i++)

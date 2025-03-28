@@ -16,7 +16,7 @@ y_noisy = y + noise
 # Creazione del modello della rete neurale
 model = keras.Sequential([
     # 5 neuroni con attivazione tangente iperbolica
-    layers.Dense(5, activation='tanh', input_shape=(1,)),  # strato nascosto
+    layers.Dense(2, activation='tanh', input_shape=(1,)),  # strato nascosto
     # 1 neurone di output senza attivazione
     layers.Dense(1)                                        # strato di output
 ])
@@ -25,12 +25,12 @@ model = keras.Sequential([
 model.compile(optimizer='adam', loss='mean_squared_error')
 
 # Addestramento del modello
-model.fit(x, y_noisy, epochs=1000, verbose=1) #verbose 0 non dice niente nell terminal più veloce
+model.fit(x, y_noisy, epochs=5000, verbose=1) #verbose 0 non dice niente nell terminal più veloce
 
 # Predizione sui dati di input (Inferenza)
 y_pred = model.predict(x)
 
-# Visualizzazione dei risultati
+# Impostazioni Plot dei risultati
 plt.figure(figsize=(10, 6))
 plt.scatter(x, y_noisy, label='Dati con rumore', color='blue', alpha=0.5)
 plt.plot(x, y, label='Funzione originale (sin)', color='green', linewidth=2)
